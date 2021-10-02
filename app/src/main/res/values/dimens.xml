@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_text_size">40sp</dimen>
+    <dimen name="standart_button_length">200dp</dimen>
+    <dimen name="layout_margin">5dp</dimen>
+</resources>

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PersonaProfileMVPApplication</string>
+    <string name="register_please">Регистрируйтесь!</string>
+    <string name="enter_nickname">Введите никнейм</string>
+    <string name="enter_age">Ваш возраст</string>
+    <string name="enter_country">Из какой Вы страны?</string>
+    <string name="enter_password">Придумайте пароль</string>
+    <string name="register_now">Зарегистрироваться!</string>
+    <string name="forget_my_password">Забыл пароль...</string>
+    <string name="enter">Войти</string>
 </resources>
