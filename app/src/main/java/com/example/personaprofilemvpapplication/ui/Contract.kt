@@ -11,7 +11,7 @@ class Contract {
         fun setState(state: ViewState)
         fun setPersona(persona: Persona)
         fun setCountryError(errorCode: Int)
-        fun setPasswordError(errorCode: Int)
+        fun setPasswordError(persona: Persona)
     }
 
     interface Presenter {
