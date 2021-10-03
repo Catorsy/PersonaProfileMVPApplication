@@ -1,29 +1,41 @@
 package com.example.personaprofilemvpapplication.ui
 
+import com.example.personaprofilemvpapplication.*
 import com.example.personaprofilemvpapplication.model.Persona
 
 class EditPersonaProfilePresenter : Contract.Presenter {
+    private var view: Contract.View? = null
+
     override fun onAttach(view: Contract.View) {
-        TODO("Not yet implemented")
+        this.view = view
+        view.setState(Contract.ViewState.IDLE)
     }
 
     override fun onDetach() {
-        TODO("Not yet implemented")
+        view = null
     }
 
     override fun onRegister(persona: Persona) {
-        TODO("Not yet implemented")
+        //можно было бы сымитировать задержку с хендлером, но это андроид-класс, не положен презентеру
+        view?.setState(Contract.ViewState.ERROR)
     }
 
     override fun onEnterInAccount(nickname: String, password: String) {
-        TODO("Not yet implemented")
     }
 
     override fun onRememberMyPassword(nickname: String) {
-        TODO("Not yet implemented")
     }
 
     override fun onCheckCountry(country: String) {
-        TODO("Not yet implemented")
+        view?.setCountryError(getRandom())
+    }
+
+    override fun onCheckMyPassword(password: String) {
+        if (password.isBlank()) {
+            view?.setPasswordError(BLANK_ERROR)
+        }
+        if (password.isEmpty()) {
+            view?.setPasswordError(EMPTY_ERROR)
+        }
     }
 }

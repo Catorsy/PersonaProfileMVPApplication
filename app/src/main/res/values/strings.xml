@@ -13,7 +13,7 @@
     <string name="no_connection_with_base">У нас нет связи с базой данных.</string>
     <string name="field_cannot_be_empty">Поле не может быть пустым!</string>
     <string name="password_cannot_be_blank">Пароль не может состоять из пробелов!</string>
-    <string name="no_success">No success!</string>
     <string name="you_need_register_again">Всё! Вам придётся регистрироваться заново!</string>
     <string name="you_cannt_enter_just_now">Пока никуда войти нельзя!</string>
+    <string name="mark_all_fields">Заполните, пожалуйста, форму!</string>
 </resources>

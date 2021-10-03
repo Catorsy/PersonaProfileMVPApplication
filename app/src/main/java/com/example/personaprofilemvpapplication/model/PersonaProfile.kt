@@ -1,7 +1,5 @@
 package com.example.personaprofilemvpapplication.model
 
-//это модель
-
 data class Persona(
     val nickname: String,
     val age: Int,
