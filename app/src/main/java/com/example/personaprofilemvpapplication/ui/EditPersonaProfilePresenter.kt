@@ -5,10 +5,14 @@ import com.example.personaprofilemvpapplication.model.Persona
 
 class EditPersonaProfilePresenter : Contract.Presenter {
     private var view: Contract.View? = null
+    private var persona: Persona? = null
 
     override fun onAttach(view: Contract.View) {
         this.view = view
         view.setState(Contract.ViewState.IDLE)
+        persona?.let{
+            view.setPersona(it)
+        }
     }
 
     override fun onDetach() {
