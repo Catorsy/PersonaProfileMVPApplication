@@ -8,19 +8,20 @@ import com.example.personaprofilemvpapplication.*
 import com.example.personaprofilemvpapplication.databinding.ActivityEditPersonaProfileBinding
 import com.example.personaprofilemvpapplication.model.Country
 import com.example.personaprofilemvpapplication.model.Persona
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
 import java.lang.NumberFormatException
 
-class EditPersonaProfileActivity : AppCompatActivity(), Contract.View {
+class EditPersonaProfileActivity : MvpAppCompatActivity(), Contract.View {
 
     private lateinit var binding: ActivityEditPersonaProfileBinding
-    private var presenter: Contract.Presenter = EditPersonaProfilePresenter()
+    private val presenter by moxyPresenter {EditPersonaProfilePresenter()}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditPersonaProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter.onAttach(this)
         initView()
     }
 
@@ -127,10 +128,5 @@ class EditPersonaProfileActivity : AppCompatActivity(), Contract.View {
             BLANK_ERROR -> binding.passwordEditText.error =
                 getString(R.string.password_cannot_be_blank)
         }
-    }
-
-    override fun onDestroy() {
-        presenter.onDetach()
-        super.onDestroy()
     }
 }

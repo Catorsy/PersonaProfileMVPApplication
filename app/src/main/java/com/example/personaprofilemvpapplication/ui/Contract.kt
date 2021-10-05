@@ -1,26 +1,32 @@
 package com.example.personaprofilemvpapplication.ui
 
 import com.example.personaprofilemvpapplication.model.Persona
+import moxy.MvpPresenter
+import moxy.MvpView
+import moxy.viewstate.strategy.alias.AddToEndSingle
+import moxy.viewstate.strategy.alias.Skip
 
 class Contract {
     enum class ViewState {
         IDLE, LOADING, SUCCESS, ERROR
     }
 
-    interface View {
+    interface View: MvpView {
+        @Skip
         fun setState(state: ViewState)
+        @AddToEndSingle
         fun setPersona(persona: Persona)
+        @AddToEndSingle
         fun setCountryError(errorCode: Int)
+        @AddToEndSingle
         fun setPasswordError(errorCode: Int)
     }
 
-    interface Presenter {
-        fun onAttach(view: View)
-        fun onDetach()
-        fun onRegister(persona: Persona)
-        fun onEnterInAccount(nickname: String, password: String)
-        fun onRememberMyPassword(nickname: String)
-        fun onCheckCountry(country: String)
-        fun onCheckMyPassword(password: String)
+    abstract class Presenter: MvpPresenter<View>() {
+        abstract fun onRegister(persona: Persona)
+        abstract fun onEnterInAccount(nickname: String, password: String)
+        abstract fun onRememberMyPassword(nickname: String)
+        abstract fun onCheckCountry(country: String)
+        abstract fun onCheckMyPassword(password: String)
     }
 }
