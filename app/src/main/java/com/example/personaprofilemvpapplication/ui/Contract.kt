@@ -20,6 +20,11 @@ class Contract {
         fun setCountryError(errorCode: Int)
         @AddToEndSingle
         fun setPasswordError(errorCode: Int)
+
+        @Skip
+        fun exit()
+        @Skip
+        fun openMainScreen(persona: Persona?)
     }
 
     abstract class Presenter: MvpPresenter<View>() {

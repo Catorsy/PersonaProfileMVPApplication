@@ -1,11 +1,13 @@
 package com.example.personaprofilemvpapplication.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.example.personaprofilemvpapplication.*
 import com.example.personaprofilemvpapplication.databinding.ActivityEditPersonaProfileBinding
+import com.example.personaprofilemvpapplication.impl.utils.app
 import com.example.personaprofilemvpapplication.model.Country
 import com.example.personaprofilemvpapplication.model.Persona
 import moxy.MvpAppCompatActivity
@@ -128,5 +130,17 @@ class EditPersonaProfileActivity : MvpAppCompatActivity(), Contract.View {
             BLANK_ERROR -> binding.passwordEditText.error =
                 getString(R.string.password_cannot_be_blank)
         }
+    }
+
+    override fun exit() {
+        finish()
+    }
+
+    override fun openMainScreen(persona: Persona?) {
+//        val intent = Intent(this, MainActivity::class.java)
+//        intent.putExtra(MainActivity.PERSONA_EXTRA_KEY, persona)
+//        startActivity(intent)
+
+        app.router.openMainScreen(this, persona)
     }
 }

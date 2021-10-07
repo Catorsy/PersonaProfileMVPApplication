@@ -13,7 +13,10 @@ class EditPersonaProfilePresenter : Contract.Presenter() {
 
     override fun onRegister(persona: Persona) {
         //можно было бы сымитировать задержку с хендлером, но это андроид-класс, не положен презентеру
-        viewState.setState(Contract.ViewState.ERROR)
+        //viewState.setState(Contract.ViewState.ERROR)
+        viewState.setState(Contract.ViewState.SUCCESS)
+        viewState.openMainScreen(persona)
+        viewState.exit()
     }
 
     override fun onEnterInAccount(nickname: String, password: String) {
