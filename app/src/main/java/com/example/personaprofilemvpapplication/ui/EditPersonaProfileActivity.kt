@@ -1,7 +1,5 @@
 package com.example.personaprofilemvpapplication.ui
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -10,6 +8,7 @@ import com.example.personaprofilemvpapplication.databinding.ActivityEditPersonaP
 import com.example.personaprofilemvpapplication.impl.utils.app
 import com.example.personaprofilemvpapplication.model.Country
 import com.example.personaprofilemvpapplication.model.Persona
+import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import java.lang.NumberFormatException
@@ -17,7 +16,7 @@ import java.lang.NumberFormatException
 class EditPersonaProfileActivity : MvpAppCompatActivity(), Contract.View {
 
     private lateinit var binding: ActivityEditPersonaProfileBinding
-    private val presenter by moxyPresenter {EditPersonaProfilePresenter()}
+    private val presenter by moxyPresenter {EditPersonaProfilePresenter(app.router)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,15 +131,27 @@ class EditPersonaProfileActivity : MvpAppCompatActivity(), Contract.View {
         }
     }
 
-    override fun exit() {
-        finish()
+    private val navigator by lazy {AppNavigator(this, binding.root.id)}
+
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        app.navigatorHolder.setNavigator(navigator)
     }
 
-    override fun openMainScreen(persona: Persona?) {
-//        val intent = Intent(this, MainActivity::class.java)
-//        intent.putExtra(MainActivity.PERSONA_EXTRA_KEY, persona)
-//        startActivity(intent)
-
-        app.router.openMainScreen(this, persona)
+    override fun onPause() {
+        app.navigatorHolder.removeNavigator()
+        super.onPause()
     }
+
+//    override fun exit() {
+//        finish()
+//    }
+//
+//    override fun openMainScreen(persona: Persona?) {
+////        val intent = Intent(this, MainActivity::class.java)
+////        intent.putExtra(MainActivity.PERSONA_EXTRA_KEY, persona)
+////        startActivity(intent)
+//
+//        app.router.openMainScreen(this, persona)
+//    }
 }

@@ -21,10 +21,10 @@ class Contract {
         @AddToEndSingle
         fun setPasswordError(errorCode: Int)
 
-        @Skip
-        fun exit()
-        @Skip
-        fun openMainScreen(persona: Persona?)
+//        @Skip
+//        fun exit()
+//        @Skip
+//        fun openMainScreen(persona: Persona?)
     }
 
     abstract class Presenter: MvpPresenter<View>() {
