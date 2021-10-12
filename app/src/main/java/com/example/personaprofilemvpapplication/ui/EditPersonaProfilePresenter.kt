@@ -2,22 +2,24 @@ package com.example.personaprofilemvpapplication.ui
 
 import com.example.personaprofilemvpapplication.*
 import com.example.personaprofilemvpapplication.model.Persona
+import com.github.terrakok.cicerone.Router
 
-class EditPersonaProfilePresenter : Contract.Presenter {
-    private var view: Contract.View? = null
+class EditPersonaProfilePresenter(private val router: Router) : Contract.Presenter() {
+    private var persona: Persona? = null
 
-    override fun onAttach(view: Contract.View) {
-        this.view = view
-        view.setState(Contract.ViewState.IDLE)
-    }
-
-    override fun onDetach() {
-        view = null
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.setState(Contract.ViewState.IDLE)
     }
 
     override fun onRegister(persona: Persona) {
         //можно было бы сымитировать задержку с хендлером, но это андроид-класс, не положен презентеру
-        view?.setState(Contract.ViewState.ERROR)
+        //viewState.setState(Contract.ViewState.ERROR)
+        viewState.setState(Contract.ViewState.SUCCESS)
+//        viewState.openMainScreen(persona)
+//        viewState.exit()
+        router.exit()
+        router.navigateTo(Screens.Main(persona))
     }
 
     override fun onEnterInAccount(nickname: String, password: String) {
@@ -27,15 +29,15 @@ class EditPersonaProfilePresenter : Contract.Presenter {
     }
 
     override fun onCheckCountry(country: String) {
-        view?.setCountryError(getRandom())
+        viewState.setCountryError(getRandom())
     }
 
     override fun onCheckMyPassword(password: String) {
         if (password.isBlank()) {
-            view?.setPasswordError(BLANK_ERROR)
+            viewState.setPasswordError(BLANK_ERROR)
         }
         if (password.isEmpty()) {
-            view?.setPasswordError(EMPTY_ERROR)
+            viewState.setPasswordError(EMPTY_ERROR)
         }
     }
 }
